@@ -29,3 +29,8 @@ issues or blockers with her tasks.
 ## Requirements
 - Review Alice's PR thoroughly with suggestions of improvement
 - Write out how you would approach Alice in a 1-1 review of her work
+
+## Additional Guidance
+- Please don't spend more than 2 hours on this task
+- Please be thorough and detailed in how you would deliver 1-1 feedback, 
+  but this should not be longer than 1 page
