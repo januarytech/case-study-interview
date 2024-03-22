@@ -16,8 +16,12 @@ class CreditCardController(BaseController):
 
     def get_credit_card_balance(self, card_number):
         credit_card = CreditCard.query.filter_by(card_number=card_number).first()
-        return jsonify({'balance': credit_card.current_balance}) if credit_card else jsonify(
-            {'error': 'Credit card not found'})
+        if credit_card:
+            # Sum up the amounts of all transactions related to the credit card
+            total_balance = sum(transaction.amount for transaction in credit_card.transactions)
+            return jsonify({'balance': total_balance})
+        else:
+            return jsonify({'error': 'Credit card not found'})
 
     def calculate_next_payment_date(self, card_number):
         credit_card = CreditCard.query.filter_by(card_number=card_number).first()

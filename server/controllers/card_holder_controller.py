@@ -6,8 +6,18 @@ from base_controller import BaseController, db
 class CardHolderController(BaseController):
     model = CardHolder
 
-    def get_card_holders(self, search_params):
-        return self.get_all(**search_params)
+    def get_card_holders(self, first_name=None, last_name=None, card_number=None):
+        query = CardHolder.query
+
+        if first_name:
+            query = query.filter(CardHolder.first_name.ilike(f'%{first_name}%'))
+        if last_name:
+            query = query.filter(CardHolder.last_name.ilike(f'%{last_name}%'))
+        if card_number:
+            query = query.join(CreditCard).filter(CreditCard.card_number.ilike(f'%{card_number}%'))
+
+        card_holders = query.all()
+        return jsonify([card_holder.to_dict() for card_holder in card_holders])
 
     def get_card_holders_by_name(self, name):
         card_holders = CardHolder.query.filter(CardHolder.name.ilike(f'%{name}%')).all()
