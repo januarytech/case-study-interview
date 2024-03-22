@@ -25,3 +25,12 @@ class CreditCard(db.Model):
     overdue_balance_payment_date = db.Column(db.Date, nullable=False)
     days_overdue = db.Column(db.Integer, nullable=False)
     card_holder_id = db.Column(db.Integer, db.ForeignKey('card_holder.id'), nullable=False)
+
+
+class Transaction(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    credit_card_id = db.Column(db.Integer, db.ForeignKey('credit_card.id'), nullable=False)
+    transaction_date = db.Column(db.Date, nullable=False)
+    description = db.Column(db.String(255), nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    credit_card = db.relationship('CreditCard', backref=db.backref('transactions', lazy=True))

@@ -9,6 +9,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" Component={SearchPage} />
+        <Route path="/account/:id" Component={AccountDetails} />
       </Switch>
     </Router>
   );

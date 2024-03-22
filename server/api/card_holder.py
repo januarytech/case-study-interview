@@ -13,3 +13,8 @@ cardholder_api = Blueprint('cardholder_api', __name__)
 def search_cardholders():
     search_params = request.args
     return card_holder_controller.get_card_holders(search_params)
+
+
+@cardholder_api.route('/cardholders/<int:card_holder_id>/details', methods=['GET'])
+def get_cardholder_detail(card_holder_id):
+    return card_holder_controller.get_card_holder_details(card_holder_id)
