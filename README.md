@@ -27,10 +27,9 @@ delayed in finishing up this project. She has also not proactively raised
 issues or blockers with her tasks.
 
 ## Requirements
-- Review Alice's PR thoroughly with suggestions of improvement
-- Write out how you would approach Alice in a 1-1 review of her work
+- Review Alice's PR thoroughly with suggestions of improvement. Please create a Google doc that outlines specific changes and comments you would leave on the PR. 
+- In a separate doc, write out how you would approach Alice in a 1-1 review of her work. This should include more high level feedback about Alice's performance and identify areas for improvement. 
 
 ## Additional Guidance
 - Please don't spend more than 2 hours on this task
-- Please be thorough and detailed in how you would deliver 1-1 feedback, 
-  but this should not be longer than 1 page
+- Please be thorough and detailed in how you would deliver the 1-1 feedback to Alice, but this should not exceed 1 page. 
