@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, ChangeEvent } from 'react';
+import React, { useState, FormEvent } from 'react';
 import SearchResultsTable from './SearchResultsTable';
 
 export interface SearchResult {
@@ -13,18 +13,19 @@ export interface SearchResult {
 }
 
 function SearchPage() {
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [cardNumber, setCardNumber] = useState<string>('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-
 
   const submitForm = async (): Promise<void> => {
     try {
-      const response = await fetch('https://api.afg.com/account-search', {
+      const response = await fetch('https://api.afg.com/cardholders/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(searchQuery),
+        body: JSON.stringify({ firstName, lastName, cardNumber }),
       });
 
       if (!response.ok) {
@@ -32,21 +33,15 @@ function SearchPage() {
       }
 
       const results: SearchResult[] = await response.json();
-      setSearchResults(results)
+      setSearchResults(results);
     } catch (error) {
       console.error('Error fetching search results:', error);
-      throw error;
     }
   };
 
-
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    submitForm()
-  };
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+    submitForm();
   };
 
   return (
@@ -54,9 +49,21 @@ function SearchPage() {
       <form onSubmit={handleSearch}>
         <input
           type="text"
-          placeholder="Search by name, card number, or issuance date"
-          value={searchQuery}
-          onChange={handleInputChange}
+          placeholder="First Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Card Number"
+          value={cardNumber}
+          onChange={(e) => setCardNumber(e.target.value)}
         />
         <button type="submit">Search</button>
       </form>
